@@ -1,7 +1,7 @@
 # Fiches mémo
 
 ## 1. La lumière en 6 règles
-1. **Avant de colorier, dessine une flèche ☀️** dans un coin de la feuille. Les ombres vont toujours du côté opposé à la flèche.
+1. **Avant de colorier, dessine une flèche** dans un coin de la feuille. Les ombres vont toujours du côté opposé à la flèche.
 2. **Il existe 2 ombres, pas plus :**
    - l'**ombre propre** est sur l'objet, du côté caché de la lampe ;
    - l'**ombre portée** est la tache que l'objet fait sur la table ou au sol.

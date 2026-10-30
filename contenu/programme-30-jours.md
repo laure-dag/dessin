@@ -5,9 +5,9 @@
 **Matériel :** crayon HB, gomme, feutre fin noir (ou brun, c'est plus doux), tes feutres à eau, un pinceau, un verre d'eau. Prends du papier d'au moins 200 g/m² les jours où tu utilises de l'eau.
 
 **Légende des ressources**
-- 📄 Article ou PDF gratuit, en français.
-- ▶️ Vidéo YouTube en français. Je l'ai trouvée par la recherche mais je n'ai pas pu la regarder : clique, et si elle ne te convient pas, signale-le dans l'appli.
-- ✏️ Pas de bon tuto en français sur ce sujet : la consigne détaillée est écrite ici.
+- **Article** : article ou PDF gratuit, en français.
+- **Vidéo** : vidéo YouTube en français. Je l'ai trouvée par la recherche mais je n'ai pas pu la regarder : clique, et si elle ne te convient pas, signale-le dans l'appli.
+- **Consigne maison** : pas de bon tuto en français sur ce sujet, la consigne détaillée est écrite ici.
 
 Toutes les ressources ont été trouvées par recherche web le 29/10/2026. L'environnement bloquait l'ouverture des pages, donc **aucun lien n'a été ouvert pour vérification**.
 
@@ -17,7 +17,7 @@ Toutes les ressources ont été trouvées par recherche web le 29/10/2026. L'env
 
 > L'idée de la semaine : une ombre n'est pas du « sale » qu'on ajoute. C'est simplement **la partie de l'objet qui ne voit pas la lampe**.
 
-### Jour 1 — Le dessin de départ 📸
+### Jour 1 — Le dessin de départ
 **Objectif :** garder une trace de ton point de départ, pour le comparer au jour 30.
 **Consigne :**
 1. Dessine **une tasse fumante posée sur une table, à côté d'un petit gâteau**.
@@ -34,7 +34,7 @@ Toutes les ressources ont été trouvées par recherche web le 29/10/2026. L'env
 
 **Consigne (crayon) :**
 1. Dessine une boule, une boîte et une boîte de conserve (sphère, cube, cylindre).
-2. Dessine une flèche ☀️ en haut à gauche de la feuille.
+2. Dessine une flèche en haut à gauche de la feuille.
 3. Hachure le côté opposé à la flèche, puis la tache au sol.
 
 **Ressources :**
@@ -101,7 +101,7 @@ Toutes les ressources ont été trouvées par recherche web le 29/10/2026. L'env
 - ▶️ Graph'O, « Technique 1 feutre aquarelle : étirement de couleur » : https://www.youtube.com/watch?v=NKcInu1RNZQ
 - ▶️ Fafahe, « Coloriage dégradé aux feutres » : https://www.youtube.com/watch?v=is3BZHhu2IA
 
-### Jour 7 — Libre ou bilan 🌿
+### Jour 7 — Libre ou bilan
 Dessine ce que tu veux, ou fais ton bilan dans l'appli : quel jour as-tu préféré ? Qu'est-ce qui reste difficile ?
 
 ---
@@ -177,7 +177,7 @@ Dessine ce que tu veux, ou fais ton bilan dans l'appli : quel jour as-tu préfé
 - ▶️ Jape (365 Dessins), « Comment dessiner un croissant kawaii » : https://www.youtube.com/watch?v=atMTAEGvdkw
 - ▶️ 365 Dessins, « Comment dessiner un donut kawaii » : https://www.youtube.com/watch?v=Ogc2Q5BF6PA
 
-### Jour 13 — La bougie : quand la lumière est DANS le dessin ✨
+### Jour 13 — La bougie : quand la lumière est DANS le dessin
 **À comprendre :**
 - Jusqu'ici, la lampe était hors de la feuille. Ici, la flamme EST la lampe : tout ce qui est autour est éclairé **depuis le centre**, et les ombres partent vers l'extérieur.
 - Règle cozy : **lumière chaude (jaune-orangé) = ombres froides (mauve, bleu-gris)**.
@@ -191,7 +191,7 @@ Dessine ce que tu veux, ou fais ton bilan dans l'appli : quel jour as-tu préfé
 - 📄 Clip Studio, « Théorie des couleurs » (lumière chaude, ombres froides) : https://www.clipstudio.net/comment-dessiner/archives/161403
 - ▶️ Jape (365 Dessins), « Comment dessiner une lampe kawaii » (pour une variante avec lampe) : https://www.youtube.com/watch?v=o2FBnPBl8M0
 
-### Jour 14 — Libre ou bilan 🌿
+### Jour 14 — Libre ou bilan
 Bilan dans l'appli. Pour comparer, ressors ta photo du jour 1.
 
 ---
@@ -213,7 +213,7 @@ Bilan dans l'appli. Pour comparer, ressors ta photo du jour 1.
 - 📄 Clip Studio, « Comment élaborer des jeux de couleurs » : https://www.clipstudio.net/comment-dessiner/archives/157855
 
 ### Jour 16 — Le plaid et le pull rayé (plis et rayures)
-**À comprendre (✏️ consigne maison, aucun tuto en français trouvé sur les rayures) :**
+**À comprendre (consigne maison, aucun tuto en français trouvé sur les rayures) :**
 - Un bras, c'est une canette. Une rayure sur un bras n'est donc pas droite : elle fait le tour de la canette **comme un bracelet**, avec une ligne légèrement courbée.
 - Dans un pli, la rayure se « casse » et repart un peu décalée.
 - Pour les plis, une petite ombre seulement **dans les creux** : au coude, sous le bras, à la taille. Pas partout !
@@ -259,7 +259,7 @@ Bilan dans l'appli. Pour comparer, ressors ta photo du jour 1.
 ### Jour 20 — Mon objet doudou
 **Consigne :** dessine l'objet qui représente le mieux ton cocon (ta tasse préférée, ton plaid, ton carnet…). Mets-le en scène avec 2 ou 3 petits objets autour. Utilise tout ce que tu sais : une lumière, une palette, une ombre propre, une ombre portée et un reflet.
 
-### Jour 21 — Libre ou bilan 🌿
+### Jour 21 — Libre ou bilan
 
 ---
 
@@ -332,7 +332,7 @@ Colorie avec une seule couleur de peau + les joues.
 - 📄 Clip Studio, « Dessiner des pieds et des mains » : https://www.clipstudio.net/comment-dessiner/archives/156379
 
 ### Jour 26 — Personnage + tasse (pose douce)
-**Consigne (✏️ consigne maison, aucun tuto en français trouvé sur les poses douces) :**
+**Consigne (consigne maison, aucun tuto en français trouvé sur les poses douces) :**
 1. Dessine un personnage assis en tailleur, enroulé dans un plaid, qui tient un mug à deux mains.
 2. Habille-le d'un pull rayé : tu sais faire depuis le jour 16 !
 3. Pour la lumière, la vapeur du mug ou une lampe à côté.
@@ -342,7 +342,7 @@ Colorie avec une seule couleur de peau + les joues.
    - sous les bras ;
    - une ombre portée sous le personnage.
 
-### Jour 27 — Ton câlin, version lumière 💛
+### Jour 27 — Ton câlin, version lumière
 **Consigne :**
 1. Reprends l'idée de ton dessin du parent qui porte l'enfant de dos.
 2. Choisis une palette cozy de 4 couleurs, par exemple un pull terracotta et bleu-gris plutôt que rouge et bleu vifs.
@@ -354,7 +354,7 @@ Colorie avec une seule couleur de peau + les joues.
 5. Ajoute un reflet clair dans les cheveux.
 6. Mets les deux versions côte à côte dans l'appli !
 
-### Jour 28 — Libre ou bilan 🌿
+### Jour 28 — Libre ou bilan
 
 ---
 
@@ -363,7 +363,7 @@ Colorie avec une seule couleur de peau + les joues.
 ### Jour 29 — Projet final
 **Consigne :** une illustration cozy complète, avec un **personnage dans son coin lecture**. Tu choisis la palette, la lumière et l'ambiance. Prends 45 min, voire plus si tu en as envie.
 
-### Jour 30 — Le grand avant/après 📸
+### Jour 30 — Le grand avant/après
 **Consigne :**
 1. Redessine **la même scène qu'au jour 1** (tasse fumante + petit gâteau).
 2. Utilise l'écran de comparaison jour 1 / jour 30 dans l'appli.

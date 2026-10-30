@@ -35,13 +35,13 @@ function resourceCard(text) {
   const [, icon, title, url, extra] = m;
   const isVideo = icon === '▶️';
   return `<div class="resource ${isVideo ? 'video' : 'article'}">
-    <span class="resource-icon" aria-hidden="true">${isVideo ? '▶' : '✎'}</span>
     <div class="resource-body">
+      <span class="resource-tag">${isVideo ? 'Vidéo' : 'Article'}</span>
       <div class="resource-title">${inline(title)}</div>
       ${extra.trim() ? `<div class="resource-extra">${inline(extra.trim())}</div>` : ''}
       <div class="resource-actions">
-        <a class="btn small" href="${escapeHtml(url)}" target="_blank" rel="noopener">${isVideo ? 'Voir la vidéo' : 'Lire'}</a>
-        <button class="btn small ghost" data-flag="${escapeHtml(url)}">Signaler</button>
+        <a href="${escapeHtml(url)}" target="_blank" rel="noopener">${isVideo ? 'Voir la vidéo' : 'Lire'}</a>
+        <button class="text-link quiet" data-flag="${escapeHtml(url)}">Signaler</button>
       </div>
     </div>
   </div>`;

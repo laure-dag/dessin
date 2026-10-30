@@ -9,7 +9,7 @@ let programme;
 let fiches;
 
 const RAPPELS = [
-  "Avant de colorier, dessine une petite flèche ☀️ : les ombres vont du côté opposé.",
+  "Avant de colorier, dessine une petite flèche : les ombres vont du côté opposé.",
   "Jamais de noir pour ombrer : même couleur, un cran plus foncée et un peu plus froide.",
   "Une seule ombre au bord net, c'est déjà tout le style « dessin animé ».",
   "Laisse le papier blanc pour le petit reflet brillant.",
@@ -18,7 +18,7 @@ const RAPPELS = [
   "Un petit ovale d'ombre sous un objet suffit pour qu'il ne flotte plus.",
   "Laisse sécher l'encre du contour avant de colorier au feutre à eau.",
   "Feutre à eau : repasser la même couleur une fois sec donne un ton plus foncé.",
-  "Un trait un peu tremblé, c'est du charme, pas une erreur. 🌿",
+  "Un trait un peu tremblé, c'est du charme, pas une erreur.",
   "Les yeux plus bas sur la tête = un personnage plus jeune et plus mignon.",
   "Les cheveux : une grande forme d'abord, les mèches à la fin.",
 ];
@@ -110,48 +110,45 @@ async function viewToday() {
   const needBackup = entries.length > 0 && (!lastExport || Date.now() - new Date(lastExport) > 14 * 86400000);
 
   return `
-  <header class="page-head">
-    <div>
-      <p class="kicker">${fmtDate(new Date(), { weekday: 'long', day: 'numeric', month: 'long' })}</p>
-      <h1>Mon carnet de dessin</h1>
-    </div>
-    <a class="icon-btn" href="#/reglages" aria-label="Réglages">⚙︎</a>
+  <header class="top">
+    <p class="date">${fmtDate(new Date(), { weekday: 'long', day: 'numeric', month: 'long' })}</p>
+    <a class="top-link" href="#/reglages">Réglages</a>
   </header>
+  <h1 class="title">Carnet de dessin</h1>
 
-  <section class="card stats">
-    <div class="stat"><span class="big">${count}</span><span>/ ${total} jours</span></div>
-    <div class="stat"><span class="big">${s}</span><span>jour${s > 1 ? 's' : ''} d'affilée</span></div>
-    <div class="stat"><span class="big">${entries.length}</span><span>dessin${entries.length > 1 ? 's' : ''}</span></div>
-    <div class="progress"><div style="width:${(count / total) * 100}%"></div></div>
+  <section class="progress-block" aria-label="Progression">
+    <ol class="ticks">${programme.days.map((d) => `<li class="${done.has(d.n) ? 'done' : current && current.n === d.n ? 'current' : ''}"></li>`).join('')}</ol>
+    <p class="progress-text">${count} jour${count > 1 ? 's' : ''} sur ${total}
+      <span>·</span> ${s} d'affilée <span>·</span> ${entries.length} dessin${entries.length > 1 ? 's' : ''}</p>
   </section>
 
   ${current ? `
-  <section class="card today">
-    <p class="kicker">Jour ${current.n} · ${esc(weekLabel(current))}</p>
+  <section class="today">
+    <p class="eyebrow">Jour ${current.n}, ${esc(weekLabel(current).toLowerCase())}</p>
     <h2>${esc(current.title)}</h2>
     <p>${inline(objectif(current))}</p>
-    <a class="btn" href="#/jour/${current.n}">Ouvrir la leçon du jour</a>
+    <a class="btn" href="#/jour/${current.n}">Ouvrir la leçon</a>
   </section>` : `
-  <section class="card today">
-    <h2>Parcours terminé ! 🎉</h2>
-    <p>Bravo, 30 jours de dessin. Va voir ton avant/après.</p>
+  <section class="today">
+    <h2>Parcours terminé</h2>
+    <p>30 jours de dessin. Il est temps de comparer le premier et le dernier.</p>
     <a class="btn" href="#/comparer">Comparer jour 1 et jour 30</a>
   </section>`}
 
   ${needBackup ? `
-  <section class="card notice">
-    <p>💾 Pense à faire une sauvegarde de tes dessins (dernière : ${lastExport ? fmtDate(lastExport) : 'jamais'}).</p>
-    <a class="btn small" href="#/reglages">Sauvegarder</a>
+  <section class="notice">
+    <p>Pense à sauvegarder tes dessins. Dernière sauvegarde : ${lastExport ? fmtDate(lastExport) : 'jamais'}.</p>
+    <a class="text-link" href="#/reglages">Sauvegarder maintenant</a>
   </section>` : ''}
 
-  <section class="card rappel">
-    <p class="kicker">Petit rappel</p>
+  <section class="rappel">
+    <p class="eyebrow">À garder en tête</p>
     <p>${esc(rappel)}</p>
   </section>
 
   ${last ? `
-  <section class="card">
-    <p class="kicker">Mon dernier dessin</p>
+  <section class="last">
+    <p class="eyebrow">Mon dernier dessin</p>
     <a href="#/photo/${last.id}"><img class="last-photo" src="${blobUrl(last.thumb)}" alt="Dernier dessin"></a>
   </section>` : ''}
   `;
@@ -163,8 +160,9 @@ async function viewParcours() {
   for (const e of [...entries].sort((a, b) => a.date.localeCompare(b.date))) if (e.day) thumbs.set(e.day, e);
 
   return `
-  <header class="page-head"><h1>${esc(programme.title.split('·')[0].trim())}</h1></header>
-  <details class="card about">
+  <h1 class="title">${esc(programme.title.split('·')[0].replace(/^Parcours 1 — /, '').trim())}</h1>
+  <p class="subtitle">${esc((programme.title.split('·')[1] || '').trim())}</p>
+  <details class="about">
     <summary>Comment marche le parcours</summary>
     <div class="prose">${md(programme.intro)}</div>
   </details>
@@ -178,7 +176,7 @@ async function viewParcours() {
           const cls = done.has(d.n) ? 'done' : current && current.n === d.n ? 'current' : '';
           return `<li class="${cls} ${d.free ? 'free' : ''}">
             <a href="#/jour/${d.n}">
-              <span class="num">${done.has(d.n) ? '✓' : d.n}</span>
+              <span class="num">${d.n}</span>
               <span class="t">${esc(d.title)}</span>
               ${t ? `<img src="${blobUrl(t.thumb)}" alt="">` : ''}
             </a>
@@ -200,25 +198,25 @@ async function viewDay(n) {
   setTimeout(() => {
     for (const f of flags) {
       const b = view.querySelector(`[data-flag="${CSS.escape(f.url)}"]`);
-      if (b) { b.textContent = 'Signalé ✓'; b.classList.add('flagged'); }
+      if (b) { b.textContent = 'Signalé'; b.classList.add('flagged'); }
     }
   });
 
   return `
   <nav class="crumbs"><a href="#/parcours">← Parcours</a></nav>
   <header class="lesson-head">
-    <p class="kicker">Jour ${n} · ${esc(weekLabel(day))}</p>
+    <p class="eyebrow">Jour ${n}, ${esc(weekLabel(day).toLowerCase())}</p>
     <h1>${esc(day.title)}</h1>
   </header>
-  <article class="card prose lesson">${md(day.body)}</article>
+  <article class="prose lesson">${md(day.body)}</article>
 
-  <section class="card mine">
+  <section class="mine">
     <h2>Mon dessin du jour</h2>
     ${entries.length ? `<div class="grid">${entries.map((e) => `
       <a href="#/photo/${e.id}"><img src="${blobUrl(e.thumb)}" alt="Dessin du jour ${n}"></a>`).join('')}</div>` : ''}
-    <button class="btn" data-action="add-photo" data-day="${n}">📷 ${entries.length ? 'Ajouter une autre photo' : 'Ajouter la photo de mon dessin'}</button>
-    <button class="btn ghost" data-action="toggle-done" data-day="${n}">
-      ${isDone ? `✓ Fait le ${fmtDate(prog.doneAt)} (annuler)` : 'Marquer comme fait sans photo'}
+    <button class="btn" data-action="add-photo" data-day="${n}">${entries.length ? 'Ajouter une autre photo' : 'Ajouter la photo de mon dessin'}</button>
+    <button class="text-link" data-action="toggle-done" data-day="${n}">
+      ${isDone ? `Fait le ${fmtDate(prog.doneAt)}. Annuler` : 'Marquer comme fait sans photo'}
     </button>
     <label class="field">
       <span>Mes notes (ce qui était facile, difficile…)</span>
@@ -227,17 +225,17 @@ async function viewDay(n) {
   </section>
 
   <nav class="pager">
-    ${prev ? `<a class="btn ghost small" href="#/jour/${prev.n}">← Jour ${prev.n}</a>` : '<span></span>'}
-    ${next ? `<a class="btn ghost small" href="#/jour/${next.n}">Jour ${next.n} →</a>` : '<span></span>'}
+    ${prev ? `<a href="#/jour/${prev.n}">← Jour ${prev.n}</a>` : '<span></span>'}
+    ${next ? `<a href="#/jour/${next.n}">Jour ${next.n} →</a>` : '<span></span>'}
   </nav>`;
 }
 
 async function viewGalerie() {
   const entries = (await db.all('entries')).sort((a, b) => b.date.localeCompare(a.date));
   return `
-  <header class="page-head"><h1>Ma galerie</h1></header>
+  <h1 class="title">Galerie</h1>
   <div class="actions-row">
-    <button class="btn small" data-action="add-free">＋ Dessin libre</button>
+    <button class="btn small" data-action="add-free">Ajouter un dessin libre</button>
     ${entries.length > 1 ? '<a class="btn small ghost" href="#/comparer">Avant / après</a>' : ''}
   </div>
   ${entries.length ? `<div class="gallery">${entries.map((e) => `
@@ -245,7 +243,7 @@ async function viewGalerie() {
       <img src="${blobUrl(e.thumb)}" alt="">
       <span>${e.day ? `Jour ${e.day}` : 'Libre'} · ${fmtDate(e.date, { day: 'numeric', month: 'short' })}</span>
     </a>`).join('')}</div>` : `
-  <div class="card empty"><p>Pas encore de dessin ici. Ouvre la leçon du jour et prends ton dessin en photo !</p></div>`}`;
+  <p class="empty">Pas encore de dessin ici. Ouvre la leçon du jour et prends ton dessin en photo.</p>`}`;
 }
 
 async function viewPhoto(id) {
@@ -255,29 +253,29 @@ async function viewPhoto(id) {
   return `
   <nav class="crumbs"><a href="javascript:history.back()">← Retour</a></nav>
   <figure class="photo-full"><img src="${blobUrl(e.photo)}" alt=""></figure>
-  <section class="card">
-    <p class="kicker">${fmtDate(e.date, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
+  <section class="photo-meta">
+    <p class="eyebrow">${fmtDate(e.date, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
     <h2>${day ? `<a href="#/jour/${day.n}">Jour ${day.n} — ${esc(day.title)}</a>` : 'Dessin libre'}</h2>
     <label class="field">
       <span>Note</span>
       <textarea data-note-entry="${e.id}" rows="3">${esc(e.note || '')}</textarea>
     </label>
-    <button class="btn danger small" data-action="delete-entry" data-id="${e.id}">Supprimer cette photo</button>
+    <button class="text-link danger" data-action="delete-entry" data-id="${e.id}">Supprimer cette photo</button>
   </section>`;
 }
 
 async function viewComparer(params) {
   const entries = (await db.all('entries')).sort((a, b) => a.date.localeCompare(b.date));
   if (entries.length < 2) return `
-    <header class="page-head"><h1>Avant / après</h1></header>
-    <div class="card empty"><p>Il faut au moins 2 dessins pour comparer.</p></div>`;
+    <h1 class="title">Avant / après</h1>
+    <p class="empty">Il faut au moins 2 dessins pour comparer.</p>`;
   const a = entries.find((e) => e.id === params.get('a')) || entries[0];
   const b = entries.find((e) => e.id === params.get('b')) || entries[entries.length - 1];
   const opt = (sel) => entries.map((e) => `<option value="${e.id}" ${e.id === sel.id ? 'selected' : ''}>
     ${e.day ? `Jour ${e.day}` : 'Libre'} — ${fmtDate(e.date, { day: 'numeric', month: 'short' })}</option>`).join('');
   return `
   <nav class="crumbs"><a href="#/galerie">← Galerie</a></nav>
-  <header class="page-head"><h1>Avant / après</h1></header>
+  <h1 class="title">Avant / après</h1>
   <div class="compare">
     <figure>
       <select data-compare="a">${opt(a)}</select>
@@ -292,10 +290,10 @@ async function viewComparer(params) {
 
 function viewFiches() {
   return `
-  <header class="page-head"><h1>Fiches mémo</h1></header>
-  <div class="fiche-list">
-    ${fiches.map((f) => `<a class="card fiche-link" href="#/fiches/${f.id}"><span class="num">${f.id}</span>${esc(f.title)}</a>`).join('')}
-  </div>`;
+  <h1 class="title">Fiches mémo</h1>
+  <ol class="fiche-list">
+    ${fiches.map((f) => `<li><a href="#/fiches/${f.id}"><span class="num">${f.id}</span>${esc(f.title)}</a></li>`).join('')}
+  </ol>`;
 }
 
 function viewFiche(id) {
@@ -303,14 +301,14 @@ function viewFiche(id) {
   if (!f) return '<p>Fiche introuvable.</p>';
   return `
   <nav class="crumbs"><a href="#/fiches">← Fiches</a></nav>
-  <header class="lesson-head"><p class="kicker">Fiche ${f.id}</p><h1>${esc(f.title)}</h1></header>
-  <article class="card prose">${md(f.body)}</article>`;
+  <header class="lesson-head"><p class="eyebrow">Fiche ${f.id}</p><h1>${esc(f.title)}</h1></header>
+  <article class="prose">${md(f.body)}</article>`;
 }
 
 async function viewNuanciers(params) {
   const tab = params.get('tab') || 'couleurs';
   const head = `
-  <header class="page-head"><h1>Mes nuanciers</h1></header>
+  <h1 class="title">Nuanciers</h1>
   <nav class="segmented">
     ${[['couleurs', 'Couleurs'], ['palettes', 'Palettes'], ['photos', 'Photos']]
       .map(([k, l]) => `<a href="#/nuanciers?tab=${k}" class="${tab === k ? 'on' : ''}">${l}</a>`).join('')}
@@ -320,32 +318,31 @@ async function viewNuanciers(params) {
     const palettes = await db.all('palettes');
     return head + `
     <p class="hint">Compose tes palettes cozy : 3 ou 4 couleurs douces + une touche vive.</p>
-    <button class="btn small" data-action="edit-palette">＋ Nouvelle palette</button>
+    <button class="btn small" data-action="edit-palette">Nouvelle palette</button>
     ${palettes.map((p) => `
-      <button class="card palette" data-action="edit-palette" data-id="${p.id}">
+      <button class="palette" data-action="edit-palette" data-id="${p.id}">
         <strong>${esc(p.nom)}</strong>
         <span class="chips">${p.colors.map((c) => `<span class="chip" style="background:${esc(c.hex)}" title="${esc(c.nom || '')}"></span>`).join('')}</span>
-      </button>`).join('') || '<div class="card empty"><p>Aucune palette pour l\'instant.</p></div>'}`;
+      </button>`).join('') || '<p class="empty">Aucune palette pour l\'instant.</p>'}`;
   }
 
   if (tab === 'photos') {
     const swatches = (await db.all('swatches')).sort((a, b) => b.date.localeCompare(a.date));
     return head + `
     <p class="hint">Prends en photo tes nuanciers papier pour les avoir toujours sur toi.</p>
-    <button class="btn small" data-action="add-swatch">📷 Ajouter une photo de nuancier</button>
+    <button class="btn small" data-action="add-swatch">Ajouter une photo de nuancier</button>
     <div class="gallery">${swatches.map((s) => `
       <a class="tile" href="${blobUrl(s.photo)}" target="_blank">
         <img src="${blobUrl(s.thumb)}" alt=""><span>${esc(s.titre)}</span>
       </a>`).join('')}</div>
-    ${swatches.length ? `<p class="hint">Pour supprimer une photo, touche ✕ à côté de son titre.</p>
-      <ul class="plain">${swatches.map((s) => `<li><button class="linklike" data-action="delete-swatch" data-id="${s.id}">✕ ${esc(s.titre)}</button></li>`).join('')}</ul>` : ''}`;
+    ${swatches.length ? `<ul class="plain">${swatches.map((s) => `<li><button class="text-link danger" data-action="delete-swatch" data-id="${s.id}">Supprimer « ${esc(s.titre)} »</button></li>`).join('')}</ul>` : ''}`;
   }
 
   const colors = await db.all('colors');
   const groups = GAMMES.map((g) => [g, colors.filter((c) => (c.gamme || 'Autre') === g)]).filter(([, l]) => l.length);
   return head + `
   <p class="hint">Note chaque couleur de ton matériel et <strong>son ombre</strong> (jour 3 du parcours).</p>
-  <button class="btn small" data-action="edit-color">＋ Ajouter une couleur</button>
+  <button class="btn small" data-action="edit-color">Ajouter une couleur</button>
   ${groups.map(([g, list]) => `
     <section class="color-group">
       <h2>${esc(g)}</h2>
@@ -355,7 +352,7 @@ async function viewNuanciers(params) {
           <span class="name">${esc(c.nom)}</span>
           ${c.ref ? `<span class="ref">${esc(c.ref)}</span>` : ''}
         </button>`).join('')}</div>
-    </section>`).join('') || '<div class="card empty"><p>Ajoute tes premières couleurs !</p></div>'}`;
+    </section>`).join('') || '<p class="empty">Ajoute tes premières couleurs.</p>'}`;
 }
 
 async function viewReglages() {
@@ -365,14 +362,14 @@ async function viewReglages() {
   if (navigator.storage && navigator.storage.estimate) {
     const est = await navigator.storage.estimate();
     const persisted = navigator.storage.persisted ? await navigator.storage.persisted() : false;
-    storage = `<p>Espace utilisé : ${(est.usage / 1048576).toLocaleString('fr-FR', { maximumFractionDigits: 1 })} Mo. ${persisted ? 'Stockage protégé ✓' : ''}</p>`;
+    storage = `<p>Espace utilisé : ${(est.usage / 1048576).toLocaleString('fr-FR', { maximumFractionDigits: 1 })} Mo. ${persisted ? 'Stockage protégé.' : ''}</p>`;
   }
   return `
   <nav class="crumbs"><a href="#/">← Accueil</a></nav>
-  <header class="page-head"><h1>Réglages</h1></header>
+  <h1 class="title">Réglages</h1>
 
-  <section class="card">
-    <h2>💾 Sauvegarde</h2>
+  <section class="settings">
+    <h2>Sauvegarde</h2>
     <p>Tes dessins sont stockés uniquement sur ce téléphone. Fais une sauvegarde régulièrement et range-la dans <em>Fichiers</em> ou iCloud Drive.</p>
     <p class="hint">Dernière sauvegarde : ${lastExport ? fmtDate(lastExport, { day: 'numeric', month: 'long', year: 'numeric' }) : 'jamais'}</p>
     ${storage}
@@ -380,8 +377,8 @@ async function viewReglages() {
     <button class="btn ghost" data-action="import">Restaurer une sauvegarde</button>
   </section>
 
-  <section class="card prose">
-    <h2>📱 Installer sur l'iPhone</h2>
+  <section class="settings prose">
+    <h2>Installer sur l'iPhone</h2>
     <ol>
       <li>Ouvre cette page dans <strong>Safari</strong>.</li>
       <li>Touche le bouton <strong>Partager</strong> (carré avec une flèche).</li>
@@ -390,18 +387,18 @@ async function viewReglages() {
     </ol>
   </section>
 
-  <section class="card">
-    <h2>⚑ Liens signalés</h2>
+  <section class="settings">
+    <h2>Liens signalés</h2>
     ${flags.length ? `<ul class="plain flags">${flags.map((f) => `
       <li><span>Jour ${f.day || '?'} · ${esc(f.note || 'sans note')}<br><a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.url)}</a></span>
-      <button class="linklike" data-action="unflag" data-url="${esc(f.url)}">Retirer</button></li>`).join('')}</ul>` :
+      <button class="text-link" data-action="unflag" data-url="${esc(f.url)}">Retirer</button></li>`).join('')}</ul>` :
       '<p class="hint">Aucun lien signalé. Dans une leçon, le bouton « Signaler » permet de noter un lien cassé ou pas adapté.</p>'}
   </section>
 
-  <section class="card">
+  <section class="settings">
     <h2>Recommencer</h2>
-    <p class="hint">Remet le parcours à zéro (les photos sont conservées dans la galerie).</p>
-    <button class="btn danger small" data-action="reset-progress">Recommencer le parcours</button>
+    <p class="hint">Remet le parcours à zéro. Les photos restent dans la galerie.</p>
+    <button class="text-link danger" data-action="reset-progress">Recommencer le parcours</button>
   </section>`;
 }
 
@@ -426,7 +423,7 @@ function openDialog(html, onSubmit) {
 }
 
 async function editColor(id) {
-  const c = (id && (await db.get('colors', id))) || { id: uid(), nom: '', ref: '', gamme: 'Feutres à eau', hex: '#c47a5a', ombre: '' };
+  const c = (id && (await db.get('colors', id))) || { id: uid(), nom: '', ref: '', gamme: 'Feutres à eau', hex: '#eebdc8', ombre: '' };
   openDialog(`
     <h2>${id ? 'Modifier la couleur' : 'Nouvelle couleur'}</h2>
     <label class="field"><span>Nom</span><input name="nom" required value="${esc(c.nom)}" placeholder="Ex. : Terracotta"></label>
@@ -434,7 +431,7 @@ async function editColor(id) {
     <label class="field"><span>Matériel</span><select name="gamme">${GAMMES.map((g) => `<option ${g === c.gamme ? 'selected' : ''}>${g}</option>`).join('')}</select></label>
     <div class="color-pickers">
       <label class="field"><span>Couleur</span><input type="color" name="hex" value="${esc(c.hex)}"></label>
-      <label class="field"><span>Son ombre</span><input type="color" name="ombre" value="${esc(c.ombre || '#6b5b73')}"></label>
+      <label class="field"><span>Son ombre</span><input type="color" name="ombre" value="${esc(c.ombre || '#9a7fa6')}"></label>
     </div>
     <label class="check"><input type="checkbox" name="hasOmbre" ${c.ombre || !id ? 'checked' : ''}> J'ai choisi une ombre pour cette couleur</label>
     <div class="dialog-actions">
@@ -456,7 +453,7 @@ async function editPalette(id) {
   const chosen = [...p.colors];
   const renderChips = () => `
     ${chosen.map((c, i) => `<button type="button" class="chip big" data-remove="${i}" style="background:${esc(c.hex)}" aria-label="Retirer"></button>`).join('')}
-    <label class="chip big add"><input type="color" data-free value="#a3b18a">＋</label>`;
+    <label class="chip big add"><input type="color" data-free value="#b9d3ea" aria-label="Ajouter une couleur libre">+</label>`;
   openDialog(`
     <h2>${id ? 'Modifier la palette' : 'Nouvelle palette'}</h2>
     <label class="field"><span>Nom</span><input name="nom" required value="${esc(p.nom)}" placeholder="Ex. : Matin d'automne"></label>
@@ -510,7 +507,7 @@ async function exportBackup() {
     download();
   }
   await db.setMeta('lastExport', new Date().toISOString());
-  toast('Sauvegarde prête ✓');
+  toast('Sauvegarde prête');
   route();
 }
 
@@ -520,14 +517,14 @@ const actions = {
     if (!file) return;
     toast('Enregistrement…');
     await addEntry({ day: Number(el.dataset.day), file });
-    toast('Dessin ajouté ✓ Bravo !');
+    toast('Photo enregistrée');
     route();
   },
   async 'add-free'() {
     const file = await pickFile();
     if (!file) return;
     await addEntry({ file });
-    toast('Dessin ajouté ✓');
+    toast('Photo enregistrée');
     route();
   },
   async 'toggle-done'(el) {
@@ -563,7 +560,7 @@ const actions = {
     if (!confirm('Restaurer cette sauvegarde ? Les données actuelles seront remplacées.')) return;
     try {
       await importAll(file);
-      toast('Sauvegarde restaurée ✓');
+      toast('Sauvegarde restaurée');
       route();
     } catch (err) {
       toast(err.message);
@@ -595,7 +592,7 @@ view.addEventListener('click', async (ev) => {
     if (note === null) return;
     const day = Number((location.hash.match(/jour\/(\d+)/) || [])[1]) || null;
     await db.put('flags', { url, day, note, date: new Date().toISOString() });
-    flag.textContent = 'Signalé ✓';
+    flag.textContent = 'Signalé';
     flag.classList.add('flagged');
     return;
   }
@@ -678,7 +675,7 @@ async function start() {
 }
 
 start().catch((err) => {
-  view.innerHTML = `<div class="card"><p>Le carnet n'a pas pu s'ouvrir : ${esc(err.message)}</p></div>`;
+  view.innerHTML = `<p class="empty">Le carnet n'a pas pu s'ouvrir : ${esc(err.message)}</p>`;
 });
 
 if ('serviceWorker' in navigator) {
