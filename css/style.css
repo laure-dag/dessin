@@ -1,4 +1,4 @@
-/* Bleu et rose pastel, typographie de carnet, peu d'ornements. */
+/* Bleu et rose pastel, typographie Outfit, peu d'ornements. */
 
 :root {
   --bg: #fbf8f7;
@@ -13,8 +13,7 @@
   --pink-mid: #eab4c2;
   --pink-ink: #a8566f;
   --danger: #a8443f;
-  --serif: 'Newsreader', 'Iowan Old Style', Georgia, serif;
-  --sans: 'Work Sans', -apple-system, 'Helvetica Neue', sans-serif;
+  --sans: 'Outfit', -apple-system, 'Helvetica Neue', sans-serif;
   color-scheme: light;
 }
 
@@ -35,6 +34,7 @@ body {
 a { color: var(--blue-ink); text-underline-offset: 3px; }
 img { max-width: 100%; display: block; }
 button { font: inherit; color: inherit; }
+em { font-style: normal; color: var(--ink-soft); }
 
 .view {
   max-width: 640px;
@@ -42,11 +42,11 @@ button { font: inherit; color: inherit; }
   padding: calc(env(safe-area-inset-top) + 16px) 20px calc(env(safe-area-inset-bottom) + 96px);
 }
 
-.loading { margin-top: 40vh; text-align: center; font-family: var(--serif); font-style: italic; color: var(--ink-soft); }
+.loading { margin-top: 40vh; text-align: center; color: var(--ink-soft); }
 
 /* --- Typographie --- */
 
-h1, h2, h3, h4, h5 { font-family: var(--serif); font-weight: 500; line-height: 1.2; margin: 0.3em 0 0.4em; letter-spacing: -0.01em; }
+h1, h2, h3, h4, h5 { font-weight: 500; line-height: 1.2; margin: 0.3em 0 0.4em; letter-spacing: -0.01em; }
 h1 { font-size: 2.1rem; }
 h2 { font-size: 1.45rem; }
 h3, h4, h5 { font-size: 1.15rem; }
@@ -54,7 +54,7 @@ h3, h4, h5 { font-size: 1.15rem; }
 .title { margin: 4px 0 18px; font-size: 2.3rem; }
 .subtitle { margin: -12px 0 18px; color: var(--ink-soft); }
 
-.eyebrow { margin: 0; font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 1rem; }
+.eyebrow { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
 
 .top { display: flex; justify-content: space-between; align-items: baseline; }
 .date { margin: 0; color: var(--ink-soft); }
@@ -109,7 +109,7 @@ h3, h4, h5 { font-size: 1.15rem; }
 .notice p { margin: 0; }
 
 .rappel { background: var(--pink); border-radius: 14px; padding: 18px 20px; margin-bottom: 18px; }
-.rappel p:last-child { margin: 4px 0 0; font-family: var(--serif); font-size: 1.12rem; line-height: 1.45; }
+.rappel p:last-child { margin: 4px 0 0; font-size: 1.12rem; line-height: 1.45; }
 
 .last { margin-top: 8px; }
 .last-photo { margin-top: 8px; border-radius: 10px; max-height: 340px; object-fit: contain; }
@@ -125,7 +125,7 @@ h3, h4, h5 { font-size: 1.15rem; }
 .prose blockquote {
   margin: 0.8em 0; padding: 14px 18px;
   background: var(--blue); border-radius: 12px;
-  font-family: var(--serif); font-size: 1.08rem;
+  font-size: 1.08rem;
 }
 .prose blockquote p { margin: 0; }
 .prose code { background: var(--blue); padding: 1px 5px; border-radius: 4px; }
@@ -165,7 +165,7 @@ th { font-weight: 600; color: var(--ink-soft); }
 .days .num {
   flex: none; display: grid; place-items: center;
   width: 32px; height: 32px; border-radius: 50%;
-  font-family: var(--serif); font-size: 1.05rem;
+  font-size: 1.05rem;
   border: 1px solid var(--line);
 }
 .days .t { flex: 1; }
@@ -173,7 +173,7 @@ th { font-weight: 600; color: var(--ink-soft); }
 .days .done .num { background: var(--pink-mid); border-color: var(--pink-mid); color: #fff; }
 .days .current .num { background: var(--blue-mid); border-color: var(--blue-mid); color: #fff; }
 .days .current .t::after { content: ' · aujourd\2019hui'; color: var(--blue-ink); font-size: 0.85rem; }
-.days .free .t { color: var(--ink-soft); font-style: italic; }
+.days .free .t { color: var(--ink-soft); }
 
 /* --- Leçon : mon dessin --- */
 
@@ -217,9 +217,9 @@ th { font-weight: 600; color: var(--ink-soft); }
 .fiche-list a {
   display: flex; align-items: center; gap: 14px;
   padding: 14px 0; border-bottom: 1px solid var(--line);
-  text-decoration: none; color: var(--ink); font-family: var(--serif); font-size: 1.2rem;
+  text-decoration: none; color: var(--ink); font-size: 1.2rem;
 }
-.fiche-list .num { color: var(--pink-ink); font-style: italic; width: 1.2em; }
+.fiche-list .num { color: var(--pink-ink); width: 1.2em; }
 
 /* --- Nuanciers --- */
 
@@ -240,7 +240,7 @@ th { font-weight: 600; color: var(--ink-soft); }
   width: 100%; padding: 14px 0; background: none; border: 0; border-bottom: 1px solid var(--line);
   text-align: left; cursor: pointer;
 }
-.palette strong { font-family: var(--serif); font-weight: 500; font-size: 1.1rem; }
+.palette strong { font-weight: 500; font-size: 1.1rem; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { display: inline-block; width: 26px; height: 26px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); }
 .chip.big { width: 40px; height: 40px; cursor: pointer; padding: 0; border: 0; }

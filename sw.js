@@ -1,6 +1,6 @@
 // Fonctionne hors connexion : l'appli et le programme sont gardés en cache.
 // Change VERSION à chaque mise à jour de l'appli.
-const VERSION = 'carnet-v2';
+const VERSION = 'carnet-v3';
 const SHELL = [
   './',
   'index.html',
